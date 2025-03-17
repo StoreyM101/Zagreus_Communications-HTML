@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>University Of Ares - Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Zagreus-Communications-Dashboard.css') }}">
+</head>
+
+<body>
+
+    <div class="content">
+        <img src="{{ url_for('static', filename='Zagreus.jpg') }}" alt="Overlay Image" class="overlay-image">
+        <div class="text-container">
+            <h1 class="title">Zagreus Telecommunications</h1>
+            <p class="slogan">Forged for Speed. Built for Strength.</p>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+
+        <div class="info-container">
+            <div class="user-info">
+                <h2>Network Information</h2>
+                <ul class="network-list">
+                    {% for item in user['network_info'] %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="teaminformation">
+                <h2>Team Information</h2>
+                <table class="team-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for note in user['teaminformation'] %}
+                        <tr>
+                            <td>{{ note['Name'] }}</td>
+                            <td>{{ note['Position'] }}</td>
+                            <td>{{ note['Email'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="dashboard-sections">
+            <h2>Customer Information</h2>
+            <table class="Customer-Info">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Data Plan</th>
+                        <th>Billing</th>
+                        <th>IMEI Device ID</th>
+                        <th>SIM ICCID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in user['customers'] %}
+                    <tr>
+                        <td>{{ customer['Name'] }}</td>
+                        <td>{{ customer['Email'] }}</td>
+                        <td>{{ customer['Phone'] }}</td>
+                        <td>{{ customer['Data Plan'] }}</td>
+                        <td>{{ customer['Billing'] }}</td>
+                        <td>{{ customer['IMEI Device ID'] }}</td>
+                        <td>{{ customer['SIM ICCID'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <form action="{{ url_for('logout') }}" method="POST">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
