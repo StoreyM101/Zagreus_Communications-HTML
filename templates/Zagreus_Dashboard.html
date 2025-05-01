@@ -1,0 +1,94 @@
+<!DOCTYPE html> <!--Document Type Decleration for HTML-->
+<html lang="en"> <!--Specifies the English Language-->
+
+<head> <!--Head of the HTML-->
+    <title>University Of Ares - Dashboard</title> <!--Title of the HTML-->
+    <meta charset="UTF-8"> <!--Specifies UTF-8 Character Encoding Standard-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Size of the visible area on the screen-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Zagreus-Communications-Dashboard.css') }}"> <!--Specifies the CSS style sheet via static link-->
+</head> <!--End of HTML Head-->
+
+<body> <!--Start of HTML Body-->
+
+    <div class="content"> <!--"content" class (top-left of webpage)-->
+        <img src="{{ url_for('static', filename='Zagreus.jpg') }}" alt="Zagreus Logo" class="overlay-image"> <!--Defines an image to overlay over background-->
+        <div class="text-container"> <!--"text-container" nested class-->
+            <h1 class="title">Zagreus Telecommunications</h1> <!--Header Definition-->
+            <p class="slogan">Forged for Speed. Built for Strength.</p> <!--Paragraph definition for text-->
+        </div> <!--End of nested "text-container" class-->
+    </div> <!--End of "content" class-->
+
+    <div class="dashboard-container"> <!--"dashboard-container" class-->
+
+        <div class="info-container"> <!--"info-container" nested class-->
+            <div class="user-info"> <!--"user-info" nested class-->
+                <h2>Network Information</h2> <!--Header Definition-->
+                <ul class="network-list">  <!--Bullet Point list "network-list" class-->
+                    {% for item in user['network_info'] %} <!--For loop through items in the user dictionary-->
+                        <li>{{ item }}</li> <!--Display every value as list item-->
+                    {% endfor %} <!--End of for loop-->
+                </ul> <!--End of Bullet Point List "network-list" class-->
+            </div> <!--End of nested "user-info" class-->
+
+            <div class="teaminformation"> <!--"teaminformation" nested class-->
+                <h2>Team Information</h2> <!--Header Definition-->
+                <table class="team-table"> <!--Table class "team-table" defined-->
+                    <thead> <!--Header of the table-->
+                        <tr> <!--Start of row definition-->
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Email</th>
+                        </tr> <!--End of row definition-->
+                    </thead> <!--End of table header-->
+                    <tbody> <!--Table body definition-->
+                        {% for note in user['teaminformation'] %} <!--Loop through dictionary of data-->
+                        <tr> <!--Start of row definition-->
+                            <td>{{ note['Name'] }}</td>
+                            <td>{{ note['Position'] }}</td>
+                            <td>{{ note['Email'] }}</td>
+                        </tr> <!--End of row definition-->
+                        {% endfor %} <!--End of for loop-->
+                    </tbody> <!--End of table body-->
+                </table> <!--End of table-->
+            </div> <!--End of nested "teaminformation" class-->
+        </div> <!--End of class "user-info"-->
+
+        <div class="dashboard-sections"> <!--"dashboard-sections" nested class-->
+            <h2>Customer Information</h2> <!--Header Definition-->
+            <table class="Customer-Info"> <!--Table Class "Customer-Info" defined-->
+                <thead> <!--Header of the table-->
+                    <tr> <!--Start of row definition-->
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Data Plan</th>
+                        <th>Billing</th>
+                        <th>IMEI Device ID</th>
+                        <th>SIM ICCID</th>
+                    </tr> <!--End of row definition-->
+                </thead> <!--End of table header-->
+                <tbody> <!--Table body definition-->
+                    {% for customer in user['customers'] %} <!--Loop through dictionary of data-->
+                    <tr> <!--Start of row definition-->
+                        <td>{{ customer['Name'] }}</td>
+                        <td>{{ customer['Email'] }}</td>
+                        <td>{{ customer['Phone'] }}</td>
+                        <td>{{ customer['Data Plan'] }}</td>
+                        <td>{{ customer['Billing'] }}</td>
+                        <td>{{ customer['IMEI Device ID'] }}</td>
+                        <td>{{ customer['SIM ICCID'] }}</td>
+                    </tr> <!--End of row definition-->
+                    {% endfor %} <!--End of for loop-->
+                </tbody> <!--End of table body-->
+            </table> <!--End of table-->
+        </div> <!--End of class "dashboard-sections"-->
+
+        <form action="{{ url_for('logout') }}" method="POST"> <!--HTML form allowing user input (passed onto a server for processing using HTTP POST request)-->
+            <button type="submit" class="logout-button">Logout</button> <!--Button to submit user input-->
+        </form> <!--End of form-->
+
+    </div> <!--End of "dashboard-container" class-->
+
+</body> <!--End of HTML Body-->
+
+</html> <!--End of HTML code-->
